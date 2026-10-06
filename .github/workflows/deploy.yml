@@ -1,0 +1,44 @@
+name: Deploy GRC Translate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: grc-translate-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pnpm install --frozen-lockfile
+      - run: python scripts/catalog.py
+      - run: pnpm test
+      - run: pnpm deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Upload runtime secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s' "$CF_ACCESS_TEAM" | pnpm exec wrangler secret put CF_ACCESS_TEAM
+          printf '%s' "$CF_ACCESS_AUD" | pnpm exec wrangler secret put CF_ACCESS_AUD
+          printf '%s' "$GITHUB_TOKEN" | pnpm exec wrangler secret put GITHUB_TOKEN
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_ACCESS_TEAM: ${{ secrets.CF_ACCESS_TEAM }}
+          CF_ACCESS_AUD: ${{ secrets.CF_ACCESS_AUD }}
+          GITHUB_TOKEN: ${{ secrets.GRC_TRANSLATE_GITHUB_TOKEN }}

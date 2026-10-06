@@ -1,0 +1,9 @@
+---
+import AppShell from '../layouts/AppShell.astro';
+import TranslatorApp from '../components/TranslatorApp';
+import { SITE } from '../site.config';
+---
+
+<AppShell title={SITE.appName}>
+  <TranslatorApp client:load />
+</AppShell>

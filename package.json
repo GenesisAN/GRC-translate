@@ -1,0 +1,45 @@
+{
+  "name": "grc-translate",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "node scripts/deploy.mjs",
+    "astro": "astro",
+    "typecheck": "astro check",
+    "db:migrate:local": "wrangler d1 migrations apply TRANSLATE_DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply TRANSLATE_DB --remote",
+    "generate-types": "wrangler types",
+    "test": "node --test scripts/*.test.mjs",
+    "translations:check": "python scripts/catalog.py",
+    "translations:csv": "python scripts/catalog.py --output dist/translations.csv"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^13.5.1",
+    "@astrojs/react": "^4.4.0",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.3",
+    "jose": "^5.9.6",
+    "lucide-react": "^0.562.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.3.0",
+    "wrangler": "^4.92.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "vite": "^7"
+  },
+  "packageManager": "pnpm@10.33.0"
+}

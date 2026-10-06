@@ -1,0 +1,40 @@
+{
+  "name": "grc-translate",
+  "account_id": "bb5bdea82c11a3bb957cf74da3e40c36",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-05-16",
+  "compatibility_flags": [
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "routes": [
+    {
+      "pattern": "i18n.venodev.com",
+      "custom_domain": true
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "GITHUB_REPO": "GenesisAN/GRC-translate",
+    "GITHUB_BRANCH": "main"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "9fe76b3828a24577bf1ebe7cd4d354dc"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "TRANSLATE_DB",
+      "database_name": "grc-translate",
+      "database_id": "80b3c29b-8936-4701-b043-90ca03fff05e",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

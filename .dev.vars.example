@@ -1,0 +1,5 @@
+CF_ACCESS_TEAM=
+CF_ACCESS_AUD=
+TRANSLATOR_EMAIL=local-dev@example
+# Fine-grained PAT, only GenesisAN/GRC-translate: Contents + Pull requests read/write.
+GITHUB_TOKEN=
