@@ -18,7 +18,8 @@
     "generate-types": "wrangler types",
     "test": "node --test scripts/*.test.mjs",
     "translations:check": "python scripts/catalog.py",
-    "translations:csv": "python scripts/catalog.py --output dist/translations.csv"
+    "translations:csv": "python scripts/catalog.py --output dist/translations.csv",
+    "verify:local": "node scripts/verify-local.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.1",

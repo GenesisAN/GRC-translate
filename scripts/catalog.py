@@ -110,6 +110,7 @@ def export_catalog(csv_path: Path, checkout: Path) -> dict:
     for language in languages:
         code = language.replace("_", "-")
         catalogs.setdefault(code, {})
+    pending = {}
     for code, old in catalogs.items():
         if not LANGUAGE.fullmatch(code):
             raise ValueError(f"Invalid language directory: {code}")
@@ -119,6 +120,8 @@ def export_catalog(csv_path: Path, checkout: Path) -> dict:
             if value:
                 current[entry_id(key, values["en"])] = value
         validate_catalog(manifest, current, source=code == "en")
+        pending[code] = current
+    for code, current in pending.items():
         save_json(locales / code / "translation.json", current)
     save_json(checkout / "catalog-keys.json", manifest)
     return {"entries": len(rows), "languages": sorted(catalogs)}

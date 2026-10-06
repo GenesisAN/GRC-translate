@@ -43,6 +43,10 @@ pnpm db:migrate:local
 pnpm dev
 ```
 
+Run `pnpm verify:local` to verify catalog loading, placeholder rejection, draft
+saving and JSON export against the local database. Evidence is saved under
+`.wrangler/local-verification`; its temporary verification draft is removed.
+
 Local development uses `TRANSLATOR_EMAIL`; production always verifies Cloudflare
 Access JWTs. Unauthenticated requests never get translator access in production.
 

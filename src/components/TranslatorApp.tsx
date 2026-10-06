@@ -640,7 +640,7 @@ export default function TranslatorApp() {
       if (check.missing.length || check.extra.length) {
         setRowErrors((e) => ({
           ...e,
-          [key]: `Keep the {{tags}}: missing ${check.missing.join(', ') || 'none'}, extra ${check.extra.join(', ') || 'none'}`,
+          [key]: `Keep numbered placeholders: missing ${check.missing.join(', ') || 'none'}, extra ${check.extra.join(', ') || 'none'}`,
         }));
         return false;
       }
@@ -1428,7 +1428,7 @@ export default function TranslatorApp() {
               Type each translation{activeLanguage ? ` in ${activeLanguageName}` : ''} in the box under the English.{' '}
               <kbd>Enter</kbd> saves and jumps to the next, <kbd>Shift</kbd>+<kbd>Enter</kbd> adds a line,{' '}
               <kbd>↑</kbd>/<kbd>↓</kbd> move between boxes, and <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes the last save. Leave
-              anything inside {'{{double braces}}'} unchanged.{' '}
+              numbered placeholders such as {'{0:N0}'} unchanged.{' '}
               <button type="button" className="link-btn" onClick={() => setShowHelp(true)}>
                 Open the full guide
               </button>
@@ -1742,8 +1742,8 @@ export default function TranslatorApp() {
                 <li>
                   <span className="guide-step-num">4</span>
                   <div>
-                    <strong>Keep the {'{{tags}}'}.</strong> Anything inside double braces, like{' '}
-                    <span className="placeholder">{'{{count}}'}</span>, is a slot the app fills in. Click the chip
+                    <strong>Keep the numbered placeholders.</strong> A numbered placeholder, like{' '}
+                    <span className="placeholder">{'{0:N0}'}</span>, is a slot the app fills in. Click the chip
                     under the English, or press <kbd>Tab</kbd> in the box, to drop it into your text. We warn you (
                     <span className="badge flagged">Needs fix</span>) if one goes missing.
                   </div>
